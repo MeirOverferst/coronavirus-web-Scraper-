@@ -1,8 +1,16 @@
+let express =require("express");
+let app = express();
+let PORT = process.env.PORT || 5000;
+const router = express.Router();
+app.use("/api",router)
+let fs = require('fs');
 const puppeteer = require("puppeteer");
+process.setMaxListeners(Infinity);
+var cron = require('node-cron');
 
-fs = require('fs');
+cron.schedule('*/30 * * * *', () => {
+console.log('running a task every 30 minutes');
 
-setInterval(()=>{
  (async () => {
         const _ = require('lodash');
         let worldometersUrl = "https://www.worldometers.info/coronavirus/";
@@ -67,15 +75,43 @@ setInterval(()=>{
         _.zip(arr1,arr2,arr3,arr4,arr5,arr6,arr7,arr8,arr9),
         _.partial(_.zipObject, ["Country/Other", "Total Cases","New Cases","Total Deaths","New Deaths","Total Recovered","Active Cases","Serious,Critical","Total Cases per Million"])
       )
-      console.log(result);
+      console.log( "got the results");
 
-    fs.writeFile('../src/updateData.json',JSON.stringify(result), function (err) {
+     fs.writeFile('./db/updateData.json',JSON.stringify(result), function (err) {
         if (err) return console.log(err);
-        console.log('result > updateData.json');
+        console.log('results > updateData.json');
       });
+      console.log('done writing');
+      browser.close();
     })();
-}, 50 * 1000)
+
+
+  });
 
 
 
+
+
+
+
+// router.get("/", (req,res)=>{
+//   let uData = require('./db/updateData.json');
+//   res.json(uData);
+// });
+
+router.get('/', (req, res) => {
+
+  fs.readFile('./db/updateData.json', (err, json) => {
+      let obj = JSON.parse(json);
+      res.json(obj);
+  });
+
+});
+
+
+
+app.listen(PORT,()=>{
+  console.log("App Running");
+  
+})
 
