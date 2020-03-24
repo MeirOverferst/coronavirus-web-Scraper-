@@ -14,11 +14,9 @@ console.log('running a task every 30 minutes');
  (async () => {
         const _ = require('lodash');
         let worldometersUrl = "https://www.worldometers.info/coronavirus/";
-        const browser = await puppeteer.launch({
-          headless: true,
-          args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        });
-       
+    
+        const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+
         let page = await browser.newPage();
         await page.goto(worldometersUrl, {
             waitUntil: "networkidle2"
