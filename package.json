@@ -1,13 +1,15 @@
 {
   "name": "pupp",
+  "engines": {
+    "node": "10.15.2"
+  },
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "MeirOverferst",
   "license": "ISC",
   "dependencies": {
     "bufferutil": "^4.0.1",
@@ -15,8 +17,6 @@
     "lodash": "^4.17.15",
     "node-cron": "^2.0.3",
     "nodemon": "^2.0.2",
-    "puppeteer": "^2.1.1",
-    "utf-8-validate": "^5.0.2",
-    "ws": "^7.2.3"
+    "puppeteer": "^2.1.1"
   }
 }
