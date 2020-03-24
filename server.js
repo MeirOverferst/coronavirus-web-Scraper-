@@ -8,14 +8,14 @@ const puppeteer = require("puppeteer");
 process.setMaxListeners(Infinity);
 var cron = require('node-cron');
 
-cron.schedule('*/30 * * * *', () => {
+cron.schedule('*/11* * * *', () => {
 console.log('running a task every 30 minutes');
 
  (async () => {
         const _ = require('lodash');
         let worldometersUrl = "https://www.worldometers.info/coronavirus/";
     
-        let browser = await puppeteer.launch();
+        let browser = await puppeteer.launch({ args: ['--no-sandbox'] });
         let page = await browser.newPage();
         await page.goto(worldometersUrl, {
             waitUntil: "networkidle2"
