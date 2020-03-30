@@ -8,7 +8,7 @@ const puppeteer = require("puppeteer");
 process.setMaxListeners(Infinity);
 var cron = require('node-cron');
 
-cron.schedule('*/20 * * * *', () => {
+cron.schedule('*/10 * * * *', () => {
 console.log('running a task every 20 minutes');
 
  (async () => {
@@ -40,6 +40,8 @@ console.log('running a task every 20 minutes');
             let Sccases = Array.from(document.querySelectorAll('#main_table_countries_today [role="row"] > td:nth-child(8)'));
             let tCasesPerMil = Array.from(document.querySelectorAll('#main_table_countries_today [role="row"] > td:nth-child(9)'));
             let tDeathssPerMil = Array.from(document.querySelectorAll('#main_table_countries_today [role="row"] > td:nth-child(10)'));
+            let fRepoCase = Array.from(document.querySelectorAll('#main_table_countries_today [role="row"] > td:nth-child(11)'));
+
 
             let sortingOrg = sorting.map(td => td.innerText);
             let cNamesOrg = cNames.map(td => td.innerText);
@@ -52,6 +54,7 @@ console.log('running a task every 20 minutes');
             let SccasesOrg = Sccases.map(td => td.innerText);
             let tCasesPerMilOrg = tCasesPerMil.map(td => td.innerText);
             let tDeathssPerMilOrg = tDeathssPerMil.map(td => td.innerText);
+            let fRepoCaseOrg = fRepoCase.map(td => td.innerText);
 
             
             return {
@@ -65,7 +68,8 @@ console.log('running a task every 20 minutes');
                 aCasesOrg,
                 SccasesOrg,
                 tCasesPerMilOrg,
-                tDeathssPerMilOrg
+                tDeathssPerMilOrg,
+                fRepoCaseOrg
             }
         })
 
@@ -79,12 +83,15 @@ console.log('running a task every 20 minutes');
         let arr8 = data.SccasesOrg;
         let arr9 = data.tCasesPerMilOrg;
         let arr10 = data.tDeathssPerMilOrg;
+        let arr11 = data.fRepoCaseOrg;
+        
+        // console.log(arr11);
         
         
 
         const result = _.map(
-        _.zip(arr1,arr2,arr3,arr4,arr5,arr6,arr7,arr8,arr9,arr10),
-        _.partial(_.zipObject, ["Country/Other", "Total Cases","New Cases","Total Deaths","New Deaths","Total Recovered","Active Cases","Serious,Critical","Total Cases per Million","Total Deaths per Million"])
+        _.zip(arr1,arr2,arr3,arr4,arr5,arr6,arr7,arr8,arr9,arr10,arr11),
+        _.partial(_.zipObject, ["Country/Other", "Total Cases","New Cases","Total Deaths","New Deaths","Total Recovered","Active Cases","Serious,Critical","Total Cases per Million","Total Deaths per Million","Reported first Case"])
         )
        console.log( "got the results");
 
