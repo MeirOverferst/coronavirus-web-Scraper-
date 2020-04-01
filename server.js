@@ -8,7 +8,7 @@ const puppeteer = require("puppeteer");
 process.setMaxListeners(Infinity);
 var cron = require('node-cron');
 
-cron.schedule('*/30 * * * *', () => {
+cron.schedule('*/60 * * * *', () => {
 console.log('running a task every 20 minutes');
 
  (async () => {
