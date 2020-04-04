@@ -40,7 +40,8 @@ console.log('running a task every 20 minutes');
             let Sccases = Array.from(document.querySelectorAll('#main_table_countries_today [role="row"] > td:nth-child(8)'));
             let tCasesPerMil = Array.from(document.querySelectorAll('#main_table_countries_today [role="row"] > td:nth-child(9)'));
             let tDeathssPerMil = Array.from(document.querySelectorAll('#main_table_countries_today [role="row"] > td:nth-child(10)'));
-            let fRepoCase = Array.from(document.querySelectorAll('#main_table_countries_today [role="row"] > td:nth-child(11)'));
+            let tTests = Array.from(document.querySelectorAll('#main_table_countries_today [role="row"] > td:nth-child(11)'));
+            let testsPerMil = Array.from(document.querySelectorAll('#main_table_countries_today [role="row"] > td:nth-child(12)'));
 
 
             let sortingOrg = sorting.map(td => td.innerText);
@@ -54,8 +55,8 @@ console.log('running a task every 20 minutes');
             let SccasesOrg = Sccases.map(td => td.innerText);
             let tCasesPerMilOrg = tCasesPerMil.map(td => td.innerText);
             let tDeathssPerMilOrg = tDeathssPerMil.map(td => td.innerText);
-            let fRepoCaseOrg = fRepoCase.map(td => td.innerText);
-
+            let tTestsOrg = tTests.map(td => td.innerText);
+            let testsPerMilOrg =testsPerMil.map(td => td.innerText);
             
             return {
                 sortingOrg,
@@ -69,7 +70,8 @@ console.log('running a task every 20 minutes');
                 SccasesOrg,
                 tCasesPerMilOrg,
                 tDeathssPerMilOrg,
-                fRepoCaseOrg
+                tTestsOrg,
+                testsPerMilOrg
             }
         })
 
@@ -83,15 +85,15 @@ console.log('running a task every 20 minutes');
         let arr8 = data.SccasesOrg;
         let arr9 = data.tCasesPerMilOrg;
         let arr10 = data.tDeathssPerMilOrg;
-        let arr11 = data.fRepoCaseOrg;
-        
+        let arr11 = data.tTestsOrg;
+        let arr12 = data.testsPerMilOrg
         // console.log(arr11);
         
         
 
         const result = _.map(
-        _.zip(arr1,arr2,arr3,arr4,arr5,arr6,arr7,arr8,arr9,arr10,arr11),
-        _.partial(_.zipObject, ["Country/Other", "Total Cases","New Cases","Total Deaths","New Deaths","Total Recovered","Active Cases","Serious,Critical","Total Cases per Million","Total Deaths per Million","Reported first Case"])
+        _.zip(arr1,arr2,arr3,arr4,arr5,arr6,arr7,arr8,arr9,arr10,arr11,arr12),
+        _.partial(_.zipObject, ["Country/Other", "Total Cases","New Cases","Total Deaths","New Deaths","Total Recovered","Active Cases","Serious,Critical","Total Cases per Million","Total Deaths per Million","Total Tests","test Per Mil"])
         )
        console.log( "got the results");
 
